@@ -21,7 +21,11 @@ $app->get('/user', function() use ($app) {
     return 'Hello User!';
 });
 
-$app->get('api/blog', 'BlogController@index');
+// $app->get('api/blog', 'BlogController@index');
+$app->group(['middleware' => 'auth'], function () use ($app) {
+    $app->get('api/blog', 'App\Http\Controllers\BlogController@index');
+});
+
 $app->get('api/blog/{id}', 'BlogController@getBlog');
 $app->post('api/blog', 'BlogController@saveBlog');
 $app->put('api/blog/{id}', 'BlogController@updateBlog');
