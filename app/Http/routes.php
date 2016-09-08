@@ -18,7 +18,11 @@ $app->get('/', function () use ($app) {
 $app->get('/user', function() use ($app) {
     // $results = app('db')->select('SELECT * FROM users');
     // $results = DB::select('SELECT * FROM users');
-    echo '<pre>';
-    print_r(get_class_methods($app));
-    return 'debug';
+    return 'Hello User!';
 });
+
+$app->get('api/blog', 'BlogController@index');
+$app->get('api/blog/{id}', 'BlogController@getBlog');
+$app->post('api/blog', 'BlogController@saveBlog');
+$app->put('api/blog/{id}', 'BlogController@updateBlog');
+$app->delete('api/blog/{id}', 'BlogController@deleteBlog');
